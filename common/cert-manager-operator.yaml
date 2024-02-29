@@ -8,6 +8,11 @@ spec:
   targetNamespaces:
     - cert-manager-operator
   upgradeStrategy: Default
+  ignoreDifferences:
+    - group: "operators.coreos.com"
+      kind: Subscription
+    - group: "operators.coreos.com"
+      kind: OperatorGroup
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
