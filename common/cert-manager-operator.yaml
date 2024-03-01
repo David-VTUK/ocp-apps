@@ -21,3 +21,29 @@ spec:
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   startingCSV: cert-manager-operator.v1.13.0
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-production
+  namespace: cert-manager
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: david.holder@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - dns01:
+        azureDNS:
+          clientID: fc1bad1b-f69f-4433-a42f-b6da6968db99
+          clientSecretSecretRef:
+            name: azuredns-config
+            key: client-secret
+          subscriptionID: aa670d15-ada9-4c3d-b0f3-96972a317072
+          tenantID: 0eb04b28-8580-42c7-9bab-7056406b5992
+          resourceGroupName: liveenvironment
+          hostedZoneName: virtualthoughts.co.uk
+          # Azure Cloud Environment, default to AzurePublicCloud
+          environment: AzurePublicCloud
+
